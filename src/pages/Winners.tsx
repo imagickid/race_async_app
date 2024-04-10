@@ -1,5 +1,11 @@
+import Table from '../components/Table';
+
 function Winners() {
-  return <div>Winners</div>;
+  return (
+    <div className="m-2 px-10">
+      <Table />
+    </div>
+  );
 }
 
 export default Winners;
