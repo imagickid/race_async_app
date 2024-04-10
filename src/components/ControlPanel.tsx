@@ -2,8 +2,19 @@ import { FaPlay } from 'react-icons/fa';
 import { HiArrowUturnLeft } from 'react-icons/hi2';
 import Button from './Button';
 import Input from './Input';
+import { createHundredCarObjects } from '../utils/helpers';
+import { CAR_BRANDS, CAR_MODELS } from '../utils/constants';
+import { useCreateCar } from '../hooks/useCreatCar';
 
 function ControlPanel() {
+  const { createNewCar } = useCreateCar();
+
+  function handeleCreateHundredCars() {
+    createHundredCarObjects(CAR_BRANDS, CAR_MODELS).map(car =>
+      createNewCar(car)
+    );
+  }
+
   return (
     <div className="flex justify-between">
       <div className="flex gap-2">
@@ -19,7 +30,7 @@ function ControlPanel() {
       <Button
         text="Generate cars"
         color="pink"
-        func={() => console.log('100 cars')}
+        func={handeleCreateHundredCars}
       />
     </div>
   );

@@ -27,3 +27,14 @@ export async function createCar(dataBody: createColorProps) {
     console.error('Error:', error);
   }
 }
+
+export async function deleteCar(id: string) {
+  try {
+    const response = await fetch(`${ASYNC_RACE_API}/garage/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) throw new Error('No car found with that id');
+  } catch (error) {
+    console.error('There was a promlem finding that car', error);
+  }
+}
