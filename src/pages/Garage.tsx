@@ -1,11 +1,15 @@
-import Car from '../components/Car';
+import CarButtons from '../components/CarButtons';
 import ControlPanel from '../components/ControlPanel';
+import Pagination from '../components/Pagination';
+import { useGetCars } from '../hooks/useGetCars';
 
 function Garage() {
+  const { isLoading, cars, totalCount } = useGetCars();
   return (
-    <div className="flex flex-col gap-3 m-2 px-10">
+    <div className="flex flex-col gap-2 m-2 px-10">
       <ControlPanel />
-      <Car />
+      <CarButtons isLoading={isLoading} cars={cars} />
+      <Pagination count={Number(totalCount)} />
     </div>
   );
 }

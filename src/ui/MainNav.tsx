@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function MainNav() {
   return (
-    <nav className="m-10">
+    <nav className="mx-5 my-5">
       <ul className="flex flex-col gap-y-6">
         <li>
           <NavLink

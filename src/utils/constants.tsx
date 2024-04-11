@@ -1,4 +1,6 @@
 export const ASYNC_RACE_API: string = 'http://127.0.0.1:3000';
+export const START_PAGE: number = 1;
+export const PAGE_SIZE: number = 7;
 
 export const CAR_BRANDS: string[] = [
   'Toyota',
@@ -21,6 +23,6 @@ export const CAR_MODELS: string[] = [
   'Punch',
   'K5',
   'Bolero',
-  'ModelV',
+  'Model V',
   'Brezza',
 ];

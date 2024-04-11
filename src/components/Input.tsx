@@ -1,21 +1,14 @@
 import { useState } from 'react';
 import Button from './Button';
-import { useCreateCar } from '../hooks/useCreatCar';
 
 interface inputProps {
   text: string;
+  func: (carName: string, carColor: string) => void;
 }
 
-export default function Input({ text }: inputProps) {
+export default function Input({ text, func }: inputProps) {
   const [carName, setCarName] = useState<string>('');
   const [carColor, setCarColor] = useState<string>('#ffffff');
-  const { createNewCar } = useCreateCar();
-
-  function handleCreateUpdateNewCar() {
-    if (!carName) return;
-    createNewCar({ name: carName, color: carColor });
-    setCarName('');
-  }
 
   return (
     <div className="flex gap-2 items-center">
@@ -32,7 +25,14 @@ export default function Input({ text }: inputProps) {
         onChange={e => setCarColor(e.target.value)}
         className="rounded-lg border border-gray-300 focus:outline-none w-6"
       />
-      <Button text={text} color="emerald" func={handleCreateUpdateNewCar} />
+      <Button
+        text={text}
+        color="emerald"
+        func={() => {
+          func(carName, carColor);
+          setCarName('');
+        }}
+      />
     </div>
   );
 }
