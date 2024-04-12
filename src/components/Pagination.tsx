@@ -30,7 +30,7 @@ function Pagination({ count }: PaginationProps) {
     setSearchParams(searchParams);
   }
   return (
-    <div className="flex gap-3 justify-end">
+    <div className="mt-3 flex gap-3 justify-end">
       <Button text="Previous" color="pink" func={prevPage}>
         <HiChevronLeft />
       </Button>

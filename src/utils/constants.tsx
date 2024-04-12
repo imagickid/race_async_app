@@ -26,3 +26,5 @@ export const CAR_MODELS: string[] = [
   'Model V',
   'Brezza',
 ];
+
+export const SCREEN_BOUNDARIES = 270;

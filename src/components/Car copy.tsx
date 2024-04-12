@@ -3,16 +3,13 @@ import { SCREEN_BOUNDARIES } from '../utils/constants';
 import Button from './Button';
 import { startStopEngine } from '../api/apiEngine';
 import { useQuery } from '@tanstack/react-query';
-import useStartEngine from '../hooks/useStartEngine';
 
 interface CarProps {
   id: string;
-  raceAll: string;
   children?: ReactNode;
 }
 
-function Car({ id, raceAll, children }: CarProps) {
-  const { startEngine, isEngineOn } = useStartEngine(id.toString());
+function Car({ id, children }: CarProps) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [startStopEngineStatus, setStartStopEngineStatus] =
     useState<string>('stopped');
@@ -21,32 +18,26 @@ function Car({ id, raceAll, children }: CarProps) {
     queryFn: () => startStopEngine({ id, status: 'started' }),
     refetchOnMount: false,
   });
-  function handleStartEngine() {
-    startEngine({ id, status: 'started' });
-    setStartStopEngineStatus('started');
-  }
-  function handleStopEngine() {
-    startEngine({ id, status: 'stopped' });
-    setStartStopEngineStatus('stopped');
-  }
-  const started =
-    (startStopEngineStatus === 'started' && !isEngineOn) ||
-    raceAll === 'started';
+  console.log(data);
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const handleStartEngine = () => setStartStopEngineStatus('started');
+  const handleStopEngine = () => setStartStopEngineStatus('stopped');
+  const started = startStopEngineStatus === 'started';
   const duration = data?.distance / data?.velocity;
   return (
     <>
       <div className="flex flex-col gap-2 w-7">
-        <Button
-          color="yellow"
-          text="A"
-          func={handleStartEngine}
-          disabled={started}
-        />
+        <Button color="yellow" text="A" func={handleStartEngine} />
         <Button color="rose" text="B" func={handleStopEngine} />
       </div>
       <div
         className="flex items-center mx-4"
         style={{
+          position: 'relative',
           transform: `translateX(${
             started ? screenWidth - SCREEN_BOUNDARIES : 0
           }px)`,
