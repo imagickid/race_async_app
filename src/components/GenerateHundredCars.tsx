@@ -1,4 +1,4 @@
-import { useCreateCar } from '../hooks/useCreatCar';
+import { useCreateCar } from '../hooks/useCar/useCreatCar';
 import { CAR_BRANDS, CAR_MODELS } from '../utils/constants';
 import { createHundredCarObjects } from '../utils/helpers';
 import Button from './Button';

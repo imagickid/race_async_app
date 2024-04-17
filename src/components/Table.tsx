@@ -1,165 +1,58 @@
-import DataTable from 'react-data-table-component';
+import { FaCarSide } from 'react-icons/fa';
+import useWinnerCars from '../hooks/useCar/useWinnerCars';
 
-interface Row {
+const tableHead = [
+  { key: 1, name: 'Car Number' },
+  { key: 2, name: 'Car' },
+  { key: 3, name: 'Name' },
+  { key: 4, name: 'Wins' },
+  { key: 5, name: 'best time (Seconds)' },
+];
+
+interface winnerProps {
   id: number;
-  fullName: string;
-  height: string;
-  weight: string;
-  seconds: number;
-}
-
-interface Column {
   name: string;
-  selector: (row: Row) => string;
-  sortable?: boolean;
+  color: string;
+  wins: number;
+  time: number;
 }
-
-const columns: Column[] = [
-  {
-    name: '#',
-    selector: (row: Row) => row.id.toString(),
-  },
-  {
-    name: 'CAR',
-    selector: (row: Row) => row.fullName,
-  },
-  {
-    name: 'NAME',
-    selector: row => row.height,
-  },
-  {
-    name: 'WINS',
-    selector: row => row.weight,
-    sortable: true,
-  },
-  {
-    name: 'BEST TIME (SECONDS)',
-    selector: row => row.seconds.toString(),
-    sortable: true,
-  },
-];
-const rows: Row[] = [
-  {
-    id: 1,
-    fullName: 'John Doe',
-    height: '1.75m',
-    weight: '89kg',
-    seconds: 2.1,
-  },
-  {
-    id: 2,
-    fullName: 'Jane Doe',
-    height: '1.64m',
-    weight: '55kg',
-    seconds: 2.2,
-  },
-  {
-    id: 3,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.3,
-  },
-  {
-    id: 4,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 5,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 6,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 7,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 8,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 9,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 10,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-  {
-    id: 11,
-    fullName: 'Sheera Maine',
-    height: '1.69m',
-    weight: '74kg',
-    seconds: 2.4,
-  },
-];
-
-const customsStyles = {
-  headRow: {
-    style: {
-      backgroundColor: '#242424',
-      color: '#fff',
-    },
-  },
-  title: {
-    style: {
-      fontWeight: 'bold',
-      backgroundColor: '#242424',
-      color: 'blue',
-    },
-  },
-  rows: {
-    style: {
-      backgroundColor: '#242424',
-      color: '#fff',
-    },
-  },
-  cells: {
-    style: {
-      fontSize: '18px',
-    },
-  },
-};
 
 export default function Table() {
+  const combinedData = useWinnerCars();
+
   return (
     <>
-      <div>
-        <DataTable
-          columns={columns}
-          data={rows}
-          title="WINNERS"
-          fixedHeader
-          pagination
-          paginationPerPage={7}
-          paginationRowsPerPageOptions={[7]}
-          customStyles={customsStyles}
-        />
-      </div>
+      <table className="w-full border-collapse">
+        <thead className="border border-solid">
+          <tr>
+            {tableHead.map(head => (
+              <td className="p-2 text-center" key={head.key}>
+                {head.name}
+              </td>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {combinedData?.map((winner: winnerProps) => {
+            return (
+              <tr key={winner.id} className="border-b">
+                <td className="p-2 text-center">{winner.id}</td>
+                <td className="p-2 flex justify-center">
+                  {
+                    <FaCarSide
+                      className="text-4xl text-center"
+                      style={{ color: winner.color }}
+                    />
+                  }
+                </td>
+                <td className="p-2 text-center">{winner?.name}</td>
+                <td className="p-2 text-center">{winner.wins}</td>
+                <td className="p-2 text-center">{winner.time.toFixed(2)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 }

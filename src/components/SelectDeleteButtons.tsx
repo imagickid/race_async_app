@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import Button from './Button';
-import { useDeleteCar } from '../hooks/useDeleteCar';
+import { useDeleteCar } from '../hooks/useCar/useDeleteCar';
+import { useDeleteWinner } from '../hooks/useWinners/useDeleteWinner';
 
 interface SelectDeleteButtonsProps {
   carId: number;
@@ -9,6 +10,7 @@ interface SelectDeleteButtonsProps {
 function SelectDeleteButtons({ carId }: SelectDeleteButtonsProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { deleteCar } = useDeleteCar();
+  const { deleteWinner } = useDeleteWinner();
 
   function handleSelect(id: string) {
     searchParams.set('carId', id);
@@ -25,7 +27,10 @@ function SelectDeleteButtons({ carId }: SelectDeleteButtonsProps) {
       <Button
         color="pink"
         text="Delete"
-        func={() => deleteCar(carId.toString())}
+        func={() => {
+          deleteCar(carId);
+          deleteWinner(carId);
+        }}
       />
     </div>
   );

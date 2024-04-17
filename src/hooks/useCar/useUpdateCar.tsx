@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateCar as updateCarApi } from '../api/apiCars';
+import { updateCar as updateCarApi } from '../../api/apiCars';
 import toast from 'react-hot-toast';
 
 interface mutationDataProps {

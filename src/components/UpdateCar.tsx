@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import Input from './Input';
-import useUpdateCar from '../hooks/useUpdateCar';
+import useUpdateCar from '../hooks/useCar/useUpdateCar';
 
 function UpdateCar() {
   const [searchParams] = useSearchParams();

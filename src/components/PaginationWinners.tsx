@@ -7,21 +7,21 @@ interface PaginationProps {
   pageSize: number;
 }
 
-function Pagination({ count, pageSize }: PaginationProps) {
+function PaginationWinners({ count, pageSize }: PaginationProps) {
   const { state, dispatch } = useCarContext();
-  const currentPage = state.currentPageCars;
+  const currentPage = state.currentPageWinners;
   if (count === 0) return;
   const pageCount = Math.ceil(count / pageSize);
 
   function nextPage() {
     const next: number =
       currentPage === pageCount ? currentPage : currentPage + 1;
-    dispatch({ type: 'setCarsPage', payload: next });
+    dispatch({ type: 'setWinnersPage', payload: next });
   }
 
   function prevPage() {
     const prev: number = currentPage === 1 ? currentPage : currentPage - 1;
-    dispatch({ type: 'setCarsPage', payload: prev });
+    dispatch({ type: 'setWinnersPage', payload: prev });
   }
   return (
     <div className="mt-3 flex gap-3 justify-end">
@@ -38,4 +38,4 @@ function Pagination({ count, pageSize }: PaginationProps) {
   );
 }
 
-export default Pagination;
+export default PaginationWinners;

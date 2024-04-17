@@ -1,15 +1,16 @@
-import { ASYNC_RACE_API, PAGE_SIZE } from '../utils/constants';
+import { ASYNC_RACE_API, PAGE_SIZE_CAR } from '../utils/constants';
 
 export async function getCars(page: number) {
   const response = await fetch(
-    `${ASYNC_RACE_API}/garage/?_limit=${PAGE_SIZE}&_page=${page}`
+    `${ASYNC_RACE_API}/garage/?_limit=${PAGE_SIZE_CAR}&_page=${page}`
   );
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
-  const totalCount = Object.fromEntries(response.headers.entries())[
-    'x-total-count'
-  ];
+  const totalCount: number = Number(
+    Object.fromEntries(response.headers.entries())['x-total-count']
+  );
+
   const data = await response.json();
   return { data, totalCount };
 }
@@ -34,7 +35,7 @@ export async function createCar(dataBody: createColorProps) {
   }
 }
 
-export async function deleteCar(id: string) {
+export async function deleteCar(id: number) {
   try {
     const response = await fetch(`${ASYNC_RACE_API}/garage/${id}`, {
       method: 'DELETE',
@@ -65,5 +66,15 @@ export async function updateCar({ id, data }: updateDataCarProps) {
     }
   } catch (error) {
     console.error('Error updating car:', error);
+  }
+}
+
+export async function getAllCars() {
+  try {
+    const response = await fetch(`${ASYNC_RACE_API}/garage/`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Cars not found`);
   }
 }

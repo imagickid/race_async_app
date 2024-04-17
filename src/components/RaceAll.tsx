@@ -1,11 +1,12 @@
 import { FaPlay } from 'react-icons/fa';
 import Button from './Button';
-import useStartEngineAll from '../hooks/useStartEngineAll';
+import { useQueryClient } from '@tanstack/react-query';
+import { useCarContext } from '../contexts/CarContext';
+import { SCREEN_BOUNDARIES } from '../utils/constants';
 
 interface Cars {
   isLoading?: boolean;
   cars: CarsProps[] | undefined;
-  setRaceAll: (started: string) => void;
 }
 interface CarsProps {
   id: number;
@@ -13,21 +14,27 @@ interface CarsProps {
   color: string;
 }
 
-function RaceAll({ cars, setRaceAll }: Cars) {
-  const { startEngineAll, isEngineOnAll } = useStartEngineAll();
+function RaceAll({ cars }: Cars) {
+  const queryClient = useQueryClient();
+  const { state, dispatch } = useCarContext();
 
-  function startRaceAll() {
-    cars?.map((car: CarsProps) =>
-      startEngineAll({ id: car.id.toString(), status: 'started' })
-    );
-    setRaceAll('started');
+  function raceAll(cars: CarsProps[] | undefined) {
+    // cars?.forEach(element => {
+    //   queryClient.invalidateQueries({ queryKey: ['carData', element.id] });
+    // });
+    dispatch({ type: 'setRaceAll', payload: true });
+    dispatch({
+      type: 'setGlobalPosition',
+      payload: window.innerWidth - SCREEN_BOUNDARIES,
+    });
   }
+
   return (
     <Button
       color="emerald"
       text="Race"
-      func={startRaceAll}
-      disabled={isEngineOnAll}
+      func={() => raceAll(cars)}
+      disabled={!!state.globalPosition}
     >
       <FaPlay />
     </Button>

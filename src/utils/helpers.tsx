@@ -28,3 +28,9 @@ export function createHundredCarObjects(
 
   return carsList;
 }
+
+export function identifyCurrentPlace(element: HTMLElement) {
+  const currElemPosPx = getComputedStyle(element).transform;
+  const currElemPosNum = Number(currElemPosPx.slice(19, -4));
+  return currElemPosNum;
+}

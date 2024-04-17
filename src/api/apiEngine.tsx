@@ -1,7 +1,7 @@
 import { ASYNC_RACE_API } from '../utils/constants';
 
 interface startStopEngineProps {
-  id: string;
+  id: number;
   status: string;
 }
 
@@ -18,13 +18,18 @@ export async function startStopEngine({ id, status }: startStopEngineProps) {
   }
 }
 
-export async function driveModeEngine(id: string, status: string) {
+export async function driveModeEngine(id: number) {
   try {
     const response = await fetch(
-      `${ASYNC_RACE_API}/engine/?id=${id}&status=${status}`,
+      `${ASYNC_RACE_API}/engine/?id=${id}&status=drive`,
       { method: 'PATCH' }
     );
     const data = await response.json();
+
+    if (!response.ok && response.status === 500) {
+      throw new Error(data.message || response.statusText);
+    }
+
     return data;
   } catch (error) {
     console.error('Engine suddenly broke:', error);

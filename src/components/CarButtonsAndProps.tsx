@@ -1,4 +1,5 @@
 import { FaCarSide } from 'react-icons/fa';
+
 import Loading from './Loading';
 import SelectDeleteButtons from './SelectDeleteButtons';
 import Car from './Car';
@@ -7,7 +8,6 @@ import StartFinishLine from './StartFinishLine';
 interface Cars {
   isLoading: boolean;
   cars: CarsProps[] | undefined;
-  raceAll: string;
 }
 interface CarsProps {
   id: number;
@@ -15,15 +15,18 @@ interface CarsProps {
   color: string;
 }
 
-function CarButtons({ isLoading, cars, raceAll }: Cars) {
+function CarButtonsAndProps({ isLoading, cars }: Cars) {
   if (isLoading) return <Loading />;
 
   return (
     <>
       {cars?.map((car: CarsProps) => (
-        <div className="flex gap-2 border-b border-solid p-2" key={car.id}>
+        <div
+          className="flex gap-2 border-b border-solid p-2 w-full"
+          key={car.id}
+        >
           <SelectDeleteButtons carId={car.id} />
-          <Car id={car.id.toString()} raceAll={raceAll}>
+          <Car id={car.id}>
             <FaCarSide className="text-5xl" style={{ color: car.color }} />
           </Car>
           <StartFinishLine text="Start" carColor={car.color} />
@@ -39,4 +42,4 @@ function CarButtons({ isLoading, cars, raceAll }: Cars) {
   );
 }
 
-export default CarButtons;
+export default CarButtonsAndProps;

@@ -9,7 +9,6 @@ function Header() {
       style={{ backgroundImage: `url(${arrows})` }}
     >
       <MainNav />
-
       <Logo />
     </div>
   );

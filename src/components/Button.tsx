@@ -14,7 +14,6 @@ interface Colors {
   emerald: string;
   rose: string;
   yellow: string;
-  // Define more colors here
 }
 
 const colors: Colors = {

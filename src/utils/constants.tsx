@@ -1,6 +1,9 @@
 export const ASYNC_RACE_API: string = 'http://127.0.0.1:3000';
 export const START_PAGE: number = 1;
-export const PAGE_SIZE: number = 7;
+export const PAGE_SIZE_CAR: number = 7;
+export const PAGE_SIZE_WINNERS: number = 5;
+export const SCREEN_BOUNDARIES: number = 260;
+export const WORST_TIME: number = 100000;
 
 export const CAR_BRANDS: string[] = [
   'Toyota',
@@ -26,5 +29,3 @@ export const CAR_MODELS: string[] = [
   'Model V',
   'Brezza',
 ];
-
-export const SCREEN_BOUNDARIES = 270;
