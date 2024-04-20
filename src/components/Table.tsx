@@ -1,12 +1,14 @@
 import { FaCarSide } from 'react-icons/fa';
 import useWinnerCars from '../hooks/useCar/useWinnerCars';
+import TableHeading from './TableHeading';
+import Loading from './Loading';
 
 const tableHead = [
-  { key: 1, name: 'Car Number' },
+  { key: 1, name: 'Id' },
   { key: 2, name: 'Car' },
   { key: 3, name: 'Name' },
   { key: 4, name: 'Wins' },
-  { key: 5, name: 'best time (Seconds)' },
+  { key: 5, name: 'Time' },
 ];
 
 interface winnerProps {
@@ -20,15 +22,14 @@ interface winnerProps {
 export default function Table() {
   const combinedData = useWinnerCars();
 
+  if (!combinedData) return <Loading />;
   return (
     <>
       <table className="w-full border-collapse">
         <thead className="border border-solid">
           <tr>
             {tableHead.map(head => (
-              <td className="p-2 text-center" key={head.key}>
-                {head.name}
-              </td>
+              <TableHeading head={head} key={head.key} />
             ))}
           </tr>
         </thead>
@@ -46,8 +47,8 @@ export default function Table() {
                   }
                 </td>
                 <td className="p-2 text-center">{winner?.name}</td>
-                <td className="p-2 text-center">{winner.wins}</td>
-                <td className="p-2 text-center">{winner.time.toFixed(2)}</td>
+                <td className="p-2 text-center">{winner?.wins}</td>
+                <td className="p-2 text-center">{winner?.time?.toFixed(2)}</td>
               </tr>
             );
           })}

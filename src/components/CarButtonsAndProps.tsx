@@ -7,9 +7,9 @@ import StartFinishLine from './StartFinishLine';
 
 interface Cars {
   isLoading: boolean;
-  cars: CarsProps[] | undefined;
+  cars: CarProps[] | undefined;
 }
-interface CarsProps {
+interface CarProps {
   id: number;
   name: string;
   color: string;
@@ -20,7 +20,7 @@ function CarButtonsAndProps({ isLoading, cars }: Cars) {
 
   return (
     <>
-      {cars?.map((car: CarsProps) => (
+      {cars?.map((car: CarProps) => (
         <div
           className="flex gap-2 border-b border-solid p-2 w-full"
           key={car.id}

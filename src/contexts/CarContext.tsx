@@ -7,6 +7,8 @@ interface CarState {
   currentPageWinners: number;
   raceAll: boolean;
   globalPosition: number;
+  sort: string;
+  order: string;
 }
 
 interface CarData {
@@ -19,7 +21,9 @@ type Action =
   | { type: 'setCarsPage'; payload?: number }
   | { type: 'setWinnersPage'; payload?: number }
   | { type: 'setRaceAll'; payload?: boolean }
-  | { type: 'setGlobalPosition'; payload?: number };
+  | { type: 'setGlobalPosition'; payload?: number }
+  | { type: 'setSort'; payload?: string }
+  | { type: 'setOrder'; payload?: string };
 
 const initialState = {
   carsWithTime: [{ id: 0, time: WORST_TIME }],
@@ -28,6 +32,8 @@ const initialState = {
   currentPageWinners: 1,
   raceAll: false,
   globalPosition: 0,
+  sort: 'id',
+  order: 'ASC',
 };
 
 interface CarContextType {
@@ -39,11 +45,6 @@ const CarContext = createContext<CarContextType | undefined>(undefined);
 
 function reducer(state: CarState, action: Action): CarState {
   switch (action.type) {
-    case 'setBestTimeCar':
-      return {
-        ...state,
-        bestTime: action.payload ?? { id: 0, time: WORST_TIME },
-      };
     case 'setCarsPage':
       return {
         ...state,
@@ -63,6 +64,16 @@ function reducer(state: CarState, action: Action): CarState {
       return {
         ...state,
         globalPosition: action.payload ?? state.globalPosition,
+      };
+    case 'setSort':
+      return {
+        ...state,
+        sort: action.payload ?? state.sort,
+      };
+    case 'setOrder':
+      return {
+        ...state,
+        order: action.payload ?? state.order,
       };
     default:
       return state;

@@ -1,8 +1,8 @@
 import { ASYNC_RACE_API, PAGE_SIZE_WINNERS } from '../utils/constants';
 
-export async function getWinners(page: number) {
+export async function getWinners(page: number, sort: string, order: string) {
   const response = await fetch(
-    `${ASYNC_RACE_API}/winners/?_limit=${PAGE_SIZE_WINNERS}&_page=${page}`
+    `${ASYNC_RACE_API}/winners/?_limit=${PAGE_SIZE_WINNERS}&_page=${page}&_sort=${sort}&_order=${order}`
   );
   if (!response.ok) {
     throw new Error('Network response was not ok');

@@ -30,11 +30,13 @@ function Car({ id, children }: CarProps) {
   function handleStop() {
     setPosition(identifyCurrentPlace(carRef.current));
   }
+
   function handleReset() {
     setPosition(0);
     setDrive(false);
     queryClient.invalidateQueries({ queryKey: ['carData', id] });
   }
+
   return (
     <>
       <StartStopButtons
@@ -50,12 +52,13 @@ function Car({ id, children }: CarProps) {
             ? `translateX(${state.globalPosition}px)`
             : `translateX(${position}px)`,
           transition: state.raceAll
-            ? `transform ${state.raceAll ? duration : 0}ms linear`
+            ? `transform ${duration}ms linear`
             : `transform ${drive ? duration : 0}ms linear`,
         }}
       >
         {children}
       </div>
+      <button onClick={handleStop}>STOP</button>
     </>
   );
 }

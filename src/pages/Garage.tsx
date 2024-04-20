@@ -6,7 +6,6 @@ import { PAGE_SIZE_CAR } from '../utils/constants';
 
 function Garage() {
   const { isLoading, cars, totalCount } = useGetCars();
-
   if (isLoading) return;
 
   return (

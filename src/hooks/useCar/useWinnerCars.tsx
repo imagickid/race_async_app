@@ -14,8 +14,8 @@ interface CarProps {
 }
 
 function useWinnerCars() {
-  const { isLoading: isGettingWinners, winners } = useGetWinners();
-  const { isLoading: isGettingCars, cars } = useGetAllCars();
+  const { isFetching: isGettingWinners, winners } = useGetWinners();
+  const { isFetching: isGettingCars, cars } = useGetAllCars();
 
   if (isGettingWinners || isGettingCars) return;
 

@@ -25,13 +25,9 @@ export async function driveModeEngine(id: number) {
       { method: 'PATCH' }
     );
     const data = await response.json();
-
-    if (!response.ok && response.status === 500) {
-      throw new Error(data.message || response.statusText);
-    }
-
     return data;
   } catch (error) {
-    console.error('Engine suddenly broke:', error);
+    console.error(error);
+    return { success: false };
   }
 }
