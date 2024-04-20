@@ -1,12 +1,12 @@
-import CarButtonsAndProps from '../components/CarButtonsAndProps';
-import ControlPanel from '../components/ControlPanel';
-import Pagination from '../components/Pagination';
-import { useGetCars } from '../hooks/useCar/useGetCars';
-import { PAGE_SIZE_CAR } from '../utils/constants';
+import CarButtonsAndProps from "../components/CarButtonsAndProps";
+import ControlPanel from "../components/ControlPanel";
+import Pagination from "../components/Pagination";
+import useGetCars from "../hooks/useCar/useGetCars";
+import { PAGE_SIZE_CAR } from "../utils/constants";
 
 function Garage() {
   const { isLoading, cars, totalCount } = useGetCars();
-  if (isLoading) return;
+  if (isLoading) return null;
 
   return (
     <div className="flex flex-col gap-2 m-2 px-10">

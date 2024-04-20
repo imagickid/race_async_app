@@ -1,5 +1,5 @@
-import { createWinner, updateWinner } from '../../api/apiWinners';
-import useGetWinners from './useGetWinners';
+import { createWinner, updateWinner } from "../../api/apiWinners";
+import useGetWinners from "./useGetWinners";
 
 interface Winner {
   wins: number;
@@ -16,17 +16,23 @@ function useAddOrUpdateWinner() {
   const { winners } = useGetWinners();
 
   function handleCreateOrUpdate(newWinner: NewWinner) {
-    const winnerToUpdaate = winners.find(
+    const winnerToUpdate = winners.find(
       (winner: Winner) => winner.id === newWinner.id
     );
 
-    if (winnerToUpdaate) {
+    if (winnerToUpdate && newWinner.time) {
       updateWinner({
-        id: winnerToUpdaate.id,
-        data: { wins: winnerToUpdaate.wins + 1, time: newWinner.time || 0 },
+        id: winnerToUpdate.id,
+        data: {
+          wins: winnerToUpdate.wins + 1,
+          time:
+            newWinner.time < winnerToUpdate.time
+              ? newWinner.time
+              : winnerToUpdate.time || 0,
+        },
       });
     }
-    if (!winnerToUpdaate) {
+    if (!winnerToUpdate) {
       createWinner({
         id: newWinner.id || 0,
         wins: 1,

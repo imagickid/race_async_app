@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateWinner as updateWinnerApi } from '../../api/apiWinners';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateWinner as updateWinnerApi } from "../../api/apiWinners";
 
-interface mutationDataProps {
+interface MutationDataProps {
   id: number;
   data: {
     wins: number;
@@ -13,12 +13,12 @@ export function useUpdateWinner() {
   const queryClient = useQueryClient();
 
   const { mutate: updateWinner } = useMutation({
-    mutationFn: ({ id, data }: mutationDataProps) =>
+    mutationFn: ({ id, data }: MutationDataProps) =>
       updateWinnerApi({ id, data }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['winners'] });
+      queryClient.invalidateQueries({ queryKey: ["winners"] });
     },
-    onError: err => console.error(err.message),
+    onError: (err) => console.error(err.message),
   });
   return { updateWinner };
 }

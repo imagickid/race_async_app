@@ -1,7 +1,7 @@
-import { useSearchParams } from 'react-router-dom';
-import Button from './Button';
-import { useDeleteCar } from '../hooks/useCar/useDeleteCar';
-import { useDeleteWinner } from '../hooks/useWinners/useDeleteWinner';
+import { useSearchParams } from "react-router-dom";
+import Button from "./Button";
+import { useDeleteCar } from "../hooks/useCar/useDeleteCar";
+import { useDeleteWinner } from "../hooks/useWinners/useDeleteWinner";
 
 interface SelectDeleteButtonsProps {
   carId: number;
@@ -13,7 +13,7 @@ function SelectDeleteButtons({ carId }: SelectDeleteButtonsProps) {
   const { deleteWinner } = useDeleteWinner();
 
   function handleSelect(id: string) {
-    searchParams.set('carId', id);
+    searchParams.set("carId", id);
     setSearchParams(searchParams);
   }
 

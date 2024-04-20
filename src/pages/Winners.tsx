@@ -1,7 +1,7 @@
-import PaginationWinners from '../components/PaginationWinners';
-import Table from '../components/Table';
-import useGetWinners from '../hooks/useWinners/useGetWinners';
-import { PAGE_SIZE_WINNERS } from '../utils/constants';
+import PaginationWinners from "../components/PaginationWinners";
+import Table from "../components/Table";
+import useGetWinners from "../hooks/useWinners/useGetWinners";
+import { PAGE_SIZE_WINNERS } from "../utils/constants";
 
 function Winners() {
   const { totalCount } = useGetWinners();

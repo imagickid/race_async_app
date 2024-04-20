@@ -1,7 +1,8 @@
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
-import { useCarContext } from '../contexts/CarContext';
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { useCarContext } from "../contexts/CarContext";
 
-import Button from './Button';
+import Button from "./Button";
+
 interface PaginationProps {
   count: number;
   pageSize: number;
@@ -10,19 +11,19 @@ interface PaginationProps {
 function Pagination({ count, pageSize }: PaginationProps) {
   const { state, dispatch } = useCarContext();
   const currentPage = state.currentPageCars;
-  if (count === 0) return;
+  if (count === 0) return null;
   const pageCount = Math.ceil(count / pageSize);
 
-  function nextPage() {
+  const nextPage = () => {
     const next: number =
       currentPage === pageCount ? currentPage : currentPage + 1;
-    dispatch({ type: 'setCarsPage', payload: next });
-  }
+    dispatch({ type: "setCarsPage", payload: next });
+  };
 
-  function prevPage() {
+  const prevPage = () => {
     const prev: number = currentPage === 1 ? currentPage : currentPage - 1;
-    dispatch({ type: 'setCarsPage', payload: prev });
-  }
+    dispatch({ type: "setCarsPage", payload: prev });
+  };
   return (
     <div className="mt-3 flex gap-3 justify-end">
       <Button text="Previous" color="pink" func={prevPage}>

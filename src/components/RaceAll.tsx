@@ -1,12 +1,11 @@
-import { FaPlay } from 'react-icons/fa';
-import Button from './Button';
-import { useCarContext } from '../contexts/CarContext';
-import { SCREEN_BOUNDARIES } from '../utils/constants';
-import { useQueryClient } from '@tanstack/react-query';
-import { driveModeEngine } from '../api/apiEngine';
-import useAddOrUpdateWinner from '../hooks/useWinners/useAddOrUpdateWinner';
-import WinnerModal from './WinnerModal';
-import { useState } from 'react';
+import { FaPlay } from "react-icons/fa";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import Button from "./Button";
+import { useCarContext } from "../contexts/CarContext";
+import { driveModeEngine } from "../api/apiEngine";
+import useAddOrUpdateWinner from "../hooks/useWinners/useAddOrUpdateWinner";
+import WinnerModal from "./WinnerModal";
 
 interface CarsProps {
   id: number;
@@ -37,7 +36,9 @@ function identifyWinner(
   const newWinner = cars?.reduce(
     (acc, car, index) => {
       const duration =
-        velocities[index]?.distance / velocities[index]?.velocity / 1000;
+        (velocities[index]?.distance ?? 0) /
+        (velocities[index]?.velocity ?? 0) /
+        1000;
       if (successStatus[index] && (!acc.time || duration < acc.time)) {
         acc.name = car.name;
         acc.time = duration;
@@ -50,38 +51,31 @@ function identifyWinner(
   return newWinner || null;
 }
 
-function RaceAll({ cars }: { cars?: CarsProps[] }) {
+function RaceAll({ cars }: { cars: CarsProps[] }) {
   const queryClient = useQueryClient();
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const [newWinner, setNewWinner] = useState<Winner | null>(null);
-  const { state, dispatch } = useCarContext();
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const { dispatch } = useCarContext();
   const handleCreateOrUpdate = useAddOrUpdateWinner();
-  async function raceAll() {
+  const raceAll = async () => {
     if (!cars) return;
-    dispatch({ type: 'setRaceAll', payload: true });
-    dispatch({
-      type: 'setGlobalPosition',
-      payload: window.innerWidth - SCREEN_BOUNDARIES,
-    });
-    const velocities = cars.map(car =>
-      queryClient.getQueryData(['carData', car.id])
+    dispatch({ type: "setRaceAll", payload: true });
+    const velocities = cars.map((car) =>
+      queryClient.getQueryData(["carData", car.id])
     ) as Velocity[];
     const successStatus = await Promise.all(
-      cars.map(async car => (await driveModeEngine(car.id)).success)
+      cars.map(async (car) => (await driveModeEngine(car.id)).success)
     );
-    const newWinner = identifyWinner(cars, velocities, successStatus);
-    if (newWinner) handleCreateOrUpdate(newWinner);
-    setNewWinner(newWinner);
-    setIsOpenModal(true);
-  }
+    const newWinnerIdentified = identifyWinner(cars, velocities, successStatus);
+    if (newWinnerIdentified && newWinnerIdentified.id !== null) {
+      handleCreateOrUpdate(newWinnerIdentified);
+      setNewWinner(newWinnerIdentified);
+      setIsOpenModal(true);
+    }
+  };
   return (
     <>
-      <Button
-        color="emerald"
-        text="Race"
-        func={raceAll}
-        disabled={!!state.globalPosition}
-      >
+      <Button color="emerald" text="Race" func={raceAll}>
         <FaPlay />
       </Button>
       {isOpenModal && newWinner && (

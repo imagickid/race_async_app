@@ -1,28 +1,29 @@
-import { ASYNC_RACE_API } from '../utils/constants';
+import { ASYNC_RACE_API } from "../utils/constants";
 
-interface startStopEngineProps {
+interface StartStopEngineProps {
   id: number;
   status: string;
 }
 
-export async function startStopEngine({ id, status }: startStopEngineProps) {
+export async function startStopEngine({ id, status }: StartStopEngineProps) {
   try {
     const response = await fetch(
       `${ASYNC_RACE_API}/engine/?id=${id}&status=${status}`,
-      { method: 'PATCH' }
+      { method: "PATCH" }
     );
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error starting car engine:', error);
+    console.error("Error starting car engine:", error);
   }
+  return null;
 }
 
 export async function driveModeEngine(id: number) {
   try {
     const response = await fetch(
       `${ASYNC_RACE_API}/engine/?id=${id}&status=drive`,
-      { method: 'PATCH' }
+      { method: "PATCH" }
     );
     const data = await response.json();
     return data;

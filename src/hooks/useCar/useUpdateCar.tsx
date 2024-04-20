@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateCar as updateCarApi } from '../../api/apiCars';
-import toast from 'react-hot-toast';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { updateCar as updateCarApi } from "../../api/apiCars";
 
-interface mutationDataProps {
+interface MutationDataProps {
   id: string;
   data: {
     name: string;
@@ -14,12 +14,12 @@ export function useUpdateCar() {
   const queryClient = useQueryClient();
 
   const { mutate: updateCar } = useMutation({
-    mutationFn: ({ id, data }: mutationDataProps) => updateCarApi({ id, data }),
+    mutationFn: ({ id, data }: MutationDataProps) => updateCarApi({ id, data }),
     onSuccess: () => {
-      toast.success('Car succesfully updated');
-      queryClient.invalidateQueries({ queryKey: ['garage'] });
+      toast.success("Car succesfully updated");
+      queryClient.invalidateQueries({ queryKey: ["garage"] });
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   });
   return { updateCar };
 }

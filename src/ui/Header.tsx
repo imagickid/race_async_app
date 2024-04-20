@@ -1,6 +1,6 @@
-import MainNav from './MainNav';
-import Logo from '../components/Logo';
-import arrows from '../assets/arrows_1.jpg';
+import MainNav from "./MainNav";
+import Logo from "../components/Logo";
+import arrows from "../assets/arrows_1.jpg";
 
 function Header() {
   return (

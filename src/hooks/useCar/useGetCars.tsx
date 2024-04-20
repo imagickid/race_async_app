@@ -1,9 +1,9 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getCars } from '../../api/apiCars.js';
-import { PAGE_SIZE_CAR } from '../../utils/constants.js';
-import { useCarContext } from '../../contexts/CarContext.js';
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCars } from "../../api/apiCars.js";
+import { PAGE_SIZE_CAR } from "../../utils/constants.js";
+import { useCarContext } from "../../contexts/CarContext.js";
 
-export function useGetCars() {
+function useGetCars() {
   const queryClient = useQueryClient();
   const { state } = useCarContext();
   const page = state.currentPageCars;
@@ -13,7 +13,7 @@ export function useGetCars() {
     data: { data: cars, totalCount } = {},
     error,
   } = useQuery({
-    queryKey: ['garage', page],
+    queryKey: ["garage", page],
     queryFn: () => getCars(page),
   });
 
@@ -23,13 +23,15 @@ export function useGetCars() {
 
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ['garage', page + 1],
+      queryKey: ["garage", page + 1],
       queryFn: () => getCars(page + 1),
     });
   if (page > 1)
     queryClient.prefetchQuery({
-      queryKey: ['garage', page - 1],
+      queryKey: ["garage", page - 1],
       queryFn: () => getCars(page - 1),
     });
   return { isLoading, cars, totalCount, error };
 }
+
+export default useGetCars;

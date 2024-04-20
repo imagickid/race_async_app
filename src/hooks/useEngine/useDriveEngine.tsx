@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { driveModeEngine } from '../../api/apiEngine';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { driveModeEngine } from "../../api/apiEngine";
 
 function useDriveEngine() {
   const queryClient = useQueryClient();
@@ -11,7 +11,8 @@ function useDriveEngine() {
     error: isEngineFailure,
   } = useMutation({
     mutationFn: driveModeEngine,
-    onSuccess: (data, id) => queryClient.setQueryData(['drive', id], data),
+    onSuccess: (dataValue, id) =>
+      queryClient.setQueryData(["drive", id], dataValue),
   });
   return { data, driveEngine, isDriving, isEngineFailure };
 }

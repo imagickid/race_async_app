@@ -1,9 +1,9 @@
-import { FaCarSide } from 'react-icons/fa';
+import { FaCarSide } from "react-icons/fa";
 
-import Loading from './Loading';
-import SelectDeleteButtons from './SelectDeleteButtons';
-import Car from './Car';
-import StartFinishLine from './StartFinishLine';
+import Loading from "./Loading";
+import SelectDeleteButtons from "./SelectDeleteButtons";
+import Car from "./Car/Car";
+import StartFinishLine from "./StartFinishLine";
 
 interface Cars {
   isLoading: boolean;
@@ -19,7 +19,7 @@ function CarButtonsAndProps({ isLoading, cars }: Cars) {
   if (isLoading) return <Loading />;
 
   return (
-    <>
+    <div>
       {cars?.map((car: CarProps) => (
         <div
           className="flex gap-2 border-b border-solid p-2 w-full"
@@ -38,7 +38,7 @@ function CarButtonsAndProps({ isLoading, cars }: Cars) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

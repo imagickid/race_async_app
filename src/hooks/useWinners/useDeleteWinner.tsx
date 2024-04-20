@@ -1,18 +1,20 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteWinner as deleteWinnerApi } from '../../api/apiWinners';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteWinner as deleteWinnerApi } from "../../api/apiWinners";
 
-export function useDeleteWinner() {
+function useDeleteWinner() {
   const queryClient = useQueryClient();
 
   const { mutate: deleteWinner } = useMutation({
     mutationFn: deleteWinnerApi,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['winners'],
+        queryKey: ["winners"],
       });
     },
-    onError: err => console.error(err.message),
+    onError: (err) => console.error(err.message),
   });
 
   return { deleteWinner };
 }
+
+export default useDeleteWinner;

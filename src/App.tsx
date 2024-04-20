@@ -1,13 +1,13 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from 'react-hot-toast';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
-import { CarProvider } from './contexts/CarContext';
+import { CarProvider } from "./contexts/CarContext";
 
-import AppLayout from './ui/AppLayout';
-import Garage from './pages/Garage';
-import Winners from './pages/Winners';
+import AppLayout from "./ui/AppLayout";
+import Garage from "./pages/Garage";
+import Winners from "./pages/Winners";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +35,7 @@ function App() {
         <Toaster
           position="top-center"
           gutter={12}
-          containerStyle={{ margin: '8px' }}
+          containerStyle={{ margin: "8px" }}
           toastOptions={{
             success: {
               duration: 3000,
@@ -44,11 +44,11 @@ function App() {
               duration: 5000,
             },
             style: {
-              fontSize: '18px',
-              maxWidth: '500px',
-              padding: '16px 24px',
-              backgroundColor: '#12dae5',
-              color: '#0d8830',
+              fontSize: "18px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "#12dae5",
+              color: "#0d8830",
             },
           }}
         />

@@ -1,10 +1,11 @@
-import { ReactNode, useRef, useState } from 'react';
-import StartStopButtons from './StartStopButtons';
-import { startStopEngine } from '../api/apiEngine';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { SCREEN_BOUNDARIES } from '../utils/constants';
-import { identifyCurrentPlace } from '../utils/helpers';
-import { useCarContext } from '../contexts/CarContext';
+import { ReactNode, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import StartStopButtons from "./StartStopButtons";
+import { startStopEngine } from "../api/apiEngine";
+import { SCREEN_BOUNDARIES } from "../utils/constants";
+import { identifyCurrentPlace } from "../utils/helpers";
+import { useCarContext } from "../contexts/CarContext";
+
 interface CarProps {
   id: number;
   children?: ReactNode;
@@ -14,29 +15,27 @@ function Car({ id, children }: CarProps) {
   const queryClient = useQueryClient();
   const carRef = useRef();
   const { data, isFetching } = useQuery({
-    queryKey: ['carData', id],
-    queryFn: () => startStopEngine({ id, status: 'started' }),
+    queryKey: ["carData", id],
+    queryFn: () => startStopEngine({ id, status: "started" }),
     refetchOnMount: false,
   });
   const { state } = useCarContext();
   const [position, setPosition] = useState<number>(0);
   const [drive, setDrive] = useState(false);
   const trackWidth = window.innerWidth;
-  const duration = data?.distance / data?.velocity;
-  function handleStart() {
+  const duration = (data?.distance ?? 0) / (data?.velocity ?? 0);
+  const handleStart = () => {
     setDrive(true);
     setPosition(trackWidth - SCREEN_BOUNDARIES);
-  }
-  function handleStop() {
+  };
+  const handleStop = () => {
     setPosition(identifyCurrentPlace(carRef.current));
-  }
-
-  function handleReset() {
+  };
+  const handleReset = () => {
     setPosition(0);
     setDrive(false);
-    queryClient.invalidateQueries({ queryKey: ['carData', id] });
-  }
-
+    queryClient.invalidateQueries({ queryKey: ["carData", id] });
+  };
   return (
     <>
       <StartStopButtons
@@ -58,9 +57,15 @@ function Car({ id, children }: CarProps) {
       >
         {children}
       </div>
-      <button onClick={handleStop}>STOP</button>
+      <button type="button" onClick={handleStop}>
+        STOP
+      </button>
     </>
   );
 }
+
+Car.defaultProps = {
+  children: null,
+};
 
 export default Car;

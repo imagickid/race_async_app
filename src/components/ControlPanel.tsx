@@ -1,11 +1,10 @@
-import GenerateHundredCars from './GenerateHundredCars';
-import CreateNewCar from './CreateNewCar';
-import UpdateCar from './UpdateCar';
-import RaceAll from './RaceAll';
-import ResetAll from './ResetAll';
+import GenerateHundredCars from "./GenerateHundredCars";
+import CreateNewCar from "./CreateNewCar";
+import UpdateCar from "./UpdateCar";
+import RaceAll from "./RaceAll";
+import ResetAll from "./ResetAll";
 
 interface Cars {
-  isLoading?: boolean;
   cars: CarsProps[] | undefined;
 }
 interface CarsProps {
