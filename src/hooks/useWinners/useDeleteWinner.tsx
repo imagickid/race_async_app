@@ -11,7 +11,6 @@ function useDeleteWinner() {
         queryKey: ["winners"],
       });
     },
-    onError: (err) => console.error(err.message),
   });
 
   return { deleteWinner };

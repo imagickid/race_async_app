@@ -14,9 +14,8 @@ export async function startStopEngine({ id, status }: StartStopEngineProps) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error starting car engine:", error);
+    return "Error starting car engine";
   }
-  return null;
 }
 
 export async function driveModeEngine(id: number) {
@@ -28,7 +27,6 @@ export async function driveModeEngine(id: number) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     return { success: false };
   }
 }

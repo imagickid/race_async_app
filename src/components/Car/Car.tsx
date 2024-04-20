@@ -1,9 +1,7 @@
 import { ReactNode, useRef } from "react";
 import StartStopButtons from "../StartStopButtons";
 import { identifyCurrentPlace } from "../../utils/helpers";
-import { useCarContext } from "../../contexts/CarContext";
 import useCarMini from "./CarMini";
-import { SCREEN_BOUNDARIES } from "../../utils/constants";
 
 interface CarProps {
   id: number;
@@ -12,44 +10,35 @@ interface CarProps {
 
 function Car({ id, children }: CarProps) {
   const {
-    setPosition,
-    setEngineWorks,
-    handleStart,
-    handleReset,
     engineWorks,
+    setEngineWorks,
     position,
-    duration,
-    drive,
-    isFetching,
+    setPosition,
+    positionStyles,
+    handleReset,
+    handleStart,
   } = useCarMini({ id });
   const carRef = useRef(null);
-  const { state } = useCarContext();
-  function handleStop() {
-    if (carRef.current) setPosition(identifyCurrentPlace(carRef.current));
-    setEngineWorks(false);
+
+  if (carRef.current && !engineWorks) {
+    setPosition(identifyCurrentPlace(carRef.current));
+    setEngineWorks(true);
   }
+
   return (
     <>
       <StartStopButtons
         handleStart={handleStart}
         handleStop={handleReset}
-        buttonStatus={!!position || isFetching}
+        buttonStatus={!!position}
       />
       <div
         ref={carRef}
         className="flex items-center mx-4"
-        style={{
-          transform: state.raceAll
-            ? `translateX(${window.innerWidth - SCREEN_BOUNDARIES}px)`
-            : `translateX(${position}px)`,
-          transition: state.raceAll
-            ? `transform ${duration}ms linear`
-            : `transform ${drive ? duration : 0}ms linear`,
-        }}
+        style={positionStyles}
       >
         {children}
       </div>
-      <button type="button" onClick={handleStop}>STOP</button>
     </>
   );
 }

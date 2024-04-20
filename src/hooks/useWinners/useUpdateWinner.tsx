@@ -18,7 +18,6 @@ export function useUpdateWinner() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["winners"] });
     },
-    onError: (err) => console.error(err.message),
   });
   return { updateWinner };
 }

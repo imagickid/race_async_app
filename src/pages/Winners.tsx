@@ -9,6 +9,9 @@ function Winners() {
   return (
     <div className="m-2 px-10">
       <Table />
+      <div className="flex items-center text-cyan-300 mt-3 font-bold">
+        WINNERS ({totalCount})
+      </div>
       <PaginationWinners
         count={Number(totalCount)}
         pageSize={PAGE_SIZE_WINNERS}

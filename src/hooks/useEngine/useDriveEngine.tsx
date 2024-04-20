@@ -5,7 +5,7 @@ function useDriveEngine() {
   const queryClient = useQueryClient();
 
   const {
-    data,
+    data: engineStatus,
     mutate: driveEngine,
     isPending: isDriving,
     error: isEngineFailure,
@@ -14,7 +14,7 @@ function useDriveEngine() {
     onSuccess: (dataValue, id) =>
       queryClient.setQueryData(["drive", id], dataValue),
   });
-  return { data, driveEngine, isDriving, isEngineFailure };
+  return { engineStatus, driveEngine, isDriving, isEngineFailure };
 }
 
 export default useDriveEngine;

@@ -31,8 +31,9 @@ export async function createCar(dataBody: CreateColorProps) {
       throw new Error("There was a problem creating a car");
     }
   } catch (error) {
-    console.error("Error:", error);
+    return error;
   }
+  return null;
 }
 
 export async function deleteCar(id: number) {
@@ -42,8 +43,9 @@ export async function deleteCar(id: number) {
     });
     if (!response.ok) throw new Error("No car found with that id");
   } catch (error) {
-    console.error("There was a promlem finding that car", error);
+    return "There was a promlem finding that car";
   }
+  return null;
 }
 
 interface UpdateDataCarProps {
@@ -61,11 +63,9 @@ export async function updateCar({ id, data }: UpdateDataCarProps) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      console.error("Failed to update a car:", response.statusText);
-    }
+    return await response.json();
   } catch (error) {
-    console.error("Error updating car:", error);
+    return error;
   }
 }
 
@@ -75,7 +75,6 @@ export async function getAllCars() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Cars not found");
+    return "Cars not found";
   }
-  return null;
 }

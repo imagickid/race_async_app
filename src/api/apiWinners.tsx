@@ -41,8 +41,9 @@ export async function createWinner(dataBody: DataBodyProps) {
       throw new Error("There was a problem creating a car");
     }
   } catch (error) {
-    console.error("Error:", error);
+    return error;
   }
+  return null;
 }
 
 export async function deleteWinner(id: number) {
@@ -52,8 +53,9 @@ export async function deleteWinner(id: number) {
     });
     if (!response.ok) throw new Error("No car found with that id");
   } catch (error) {
-    console.error("There was a promlem finding that car", error);
+    return "There was a promlem finding that car";
   }
+  return null;
 }
 
 interface UpdateWinnerProps {
@@ -71,10 +73,8 @@ export async function updateWinner({ id, data }: UpdateWinnerProps) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      console.error("Failed to update a winner:", response.statusText);
-    }
+    return await response.json();
   } catch (error) {
-    console.error("Error updating winner:", error);
+    return "Error updating winner";
   }
 }

@@ -1,44 +1,50 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { startStopEngine } from "../../api/apiEngine";
+import { driveModeEngine, startStopEngine } from "../../api/apiEngine";
 import { SCREEN_BOUNDARIES } from "../../utils/constants";
+import { useCarContext } from "../../contexts/CarContext";
+
+type VelocityDataProps = {
+  distance?: number;
+  velocity?: number;
+};
 
 function useCarMini({ id }: { id: number }) {
-  const queryClient = useQueryClient();
-  const { data, isFetching } = useQuery({
-    queryKey: ["carData", id],
-    queryFn: () => startStopEngine({ id, status: "started" }),
-    refetchOnMount: false,
-  });
+  const { state } = useCarContext();
+  const [velocityData, setVelocityData] = useState<VelocityDataProps>();
   const [position, setPosition] = useState<number>(0);
   const [drive, setDrive] = useState<boolean>(false);
   const [engineWorks, setEngineWorks] = useState<boolean>(true);
-  const duration = (data?.distance ?? 0) / (data?.velocity ?? 1);
-  const trackWidth = window.innerWidth;
+  const duration =
+    (velocityData?.distance ?? 0) / (velocityData?.velocity ?? 1);
 
-  function handleStart() {
+  const handleStart = async () => {
+    const velocity = await startStopEngine({ id, status: "started" });
+    setVelocityData(velocity);
     setDrive(true);
-    setPosition(trackWidth - SCREEN_BOUNDARIES);
-  }
-
+    setPosition(window.innerWidth - SCREEN_BOUNDARIES);
+    const engineStatus = await driveModeEngine(id);
+    setEngineWorks(engineStatus?.success);
+  };
   function handleReset() {
     setPosition(0);
     setDrive(false);
-    queryClient.invalidateQueries({ queryKey: ["carData", id] });
   }
-
+  const positionStyles = {
+    transform: state.raceAll
+      ? `translateX(${window.innerWidth - SCREEN_BOUNDARIES}px)`
+      : `translateX(${position}px)`,
+    transition: state.raceAll
+      ? `transform ${duration}ms linear`
+      : `transform ${drive ? duration : 0}ms linear`,
+  };
   return {
-    duration,
-    trackWidth,
+    positionStyles,
     position,
     setPosition,
-    drive,
     engineWorks,
     setEngineWorks,
-    setDrive,
     handleReset,
     handleStart,
-    isFetching,
   };
 }
 

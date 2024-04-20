@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
-import { useDeleteCar } from "../hooks/useCar/useDeleteCar";
-import { useDeleteWinner } from "../hooks/useWinners/useDeleteWinner";
+import useDeleteCar from "../hooks/useCar/useDeleteCar";
+import useDeleteWinner from "../hooks/useWinners/useDeleteWinner";
 
 interface SelectDeleteButtonsProps {
   carId: number;
