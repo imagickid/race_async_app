@@ -51,7 +51,7 @@ function identifyWinner(
   return newWinner || null;
 }
 
-function RaceAll({ cars }: { cars: CarsProps[] }) {
+function RaceAll({ cars }: { cars: CarsProps[] | undefined }) {
   const queryClient = useQueryClient();
   const [newWinner, setNewWinner] = useState<Winner | null>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
