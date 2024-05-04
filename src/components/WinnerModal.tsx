@@ -1,10 +1,10 @@
 interface WinnerModalProps {
   onClose: () => void;
   winner: {
-    name: string | null;
-    time: number | null;
-    id: number | null;
-  };
+    name: string;
+    time: number;
+    id: number;
+  } | null;
 }
 
 function WinnerModal({ onClose, winner }: WinnerModalProps) {

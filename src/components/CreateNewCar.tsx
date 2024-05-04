@@ -1,4 +1,4 @@
-import useCreateCar from "../hooks/useCar/useCreatCar";
+import useCreateCar from "../hooks/useCar/useCreateCar";
 import Input from "./Input";
 
 function CreateNewCar() {

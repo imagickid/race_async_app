@@ -1,41 +1,48 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import StartStopButtons from "../StartStopButtons";
+import { useCarContext } from "../../contexts/CarContext";
 import { identifyCurrentPlace } from "../../utils/helpers";
-import useCarMini from "./CarMini";
+import useCarState from "./useCarState";
 
 interface CarProps {
   id: number;
+  name: string;
   children?: ReactNode;
 }
 
-function Car({ id, children }: CarProps) {
-  const {
-    engineWorks,
-    setEngineWorks,
-    position,
-    setPosition,
-    positionStyles,
-    handleReset,
-    handleStart,
-  } = useCarMini({ id });
+function Car({ id, name, children }: CarProps) {
   const carRef = useRef(null);
+  const {
+    duration,
+    engineStatus,
+    positionStyle,
+    position,
+    handleRace,
+    handleReset,
+  } = useCarState({ id });
+  const { updatePosition, winnerIs } = useCarContext();
 
-  if (carRef.current && !engineWorks) {
-    setPosition(identifyCurrentPlace(carRef.current));
-    setEngineWorks(true);
-  }
+  useEffect(() => {
+    if (engineStatus && !engineStatus.success && carRef.current)
+      updatePosition(id, identifyCurrentPlace(carRef.current));
+  }, [engineStatus, id, updatePosition]);
+
+  useEffect(() => {
+    if (engineStatus && engineStatus.success && typeof duration === "number")
+      winnerIs({ id, name, time: duration / 1000 });
+  });
 
   return (
     <>
       <StartStopButtons
-        handleStart={handleStart}
+        handleStart={handleRace}
         handleStop={handleReset}
         buttonStatus={!!position}
       />
       <div
         ref={carRef}
         className="flex items-center mx-4"
-        style={positionStyles}
+        style={positionStyle}
       >
         {children}
       </div>

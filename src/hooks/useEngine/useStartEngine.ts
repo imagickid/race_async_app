@@ -10,8 +10,9 @@ function useStartEngine() {
     isPending: isTurningOn,
   } = useMutation({
     mutationFn: startStopEngine,
-    onSuccess: (dataValue, variables) =>
-      queryClient.setQueryData(["carData", variables.id], dataValue),
+    onSuccess: (dataValue, variables) => {
+      queryClient.setQueryData(["carData", variables.id], dataValue);
+    },
     onError: (err) => toast.error(err.message),
   });
   return { data, startEngine, isTurningOn };

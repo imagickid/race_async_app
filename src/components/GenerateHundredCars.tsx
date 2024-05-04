@@ -1,4 +1,4 @@
-import useCreateCar from "../hooks/useCar/useCreatCar";
+import useCreateCar from "../hooks/useCar/useCreateCar";
 import { CAR_BRANDS, CAR_MODELS } from "../utils/constants";
 import { createHundredCarObjects } from "../utils/helpers";
 import Button from "./Button";
@@ -11,7 +11,13 @@ function GenerateHundredCars() {
     );
   };
   return (
-    <Button text="Generate cars" color="pink" func={handeleCreateHundredCars} />
+    <div className="w-28">
+      <Button
+        text="Generate cars"
+        color="pink"
+        func={handeleCreateHundredCars}
+      />
+    </div>
   );
 }
 

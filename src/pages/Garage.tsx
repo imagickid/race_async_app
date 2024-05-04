@@ -13,7 +13,7 @@ function Garage() {
       <ControlPanel cars={cars} />
       <CarButtonsAndProps isLoading={isLoading} cars={cars} />
       <div className="flex justify-between">
-        <div className="flex items-center text-cyan-300 mt-3 font-bold">
+        <div className="flex items-center text-cyan-300 mt-3 font-bold text-xs lg:text-base">
           GARAGE ({totalCount})
         </div>
         <Pagination count={Number(totalCount)} pageSize={PAGE_SIZE_CAR} />

@@ -4,9 +4,7 @@ import { useCarContext } from "../../contexts/CarContext";
 
 function useGetWinners() {
   const { state } = useCarContext();
-  const page = state.currentPageWinners;
-  const { order } = state;
-  const { sort } = state;
+  const { order, sort, currentPageCars: page } = state;
 
   const { isFetching, data: { data: winners = [], totalCount } = {} } =
     useQuery({

@@ -7,20 +7,19 @@ interface Winner {
   id: number;
 }
 
-interface NewWinner {
-  id: number | null;
-  time: number | null;
-}
+type NewWinner = {
+  id: number;
+  time: number;
+};
 
 function useAddOrUpdateWinner() {
   const { winners } = useGetWinners();
 
-  function handleCreateOrUpdate(newWinner: NewWinner) {
+  function handleCreateOrUpdate(newWinner: NewWinner | null) {
     const winnerToUpdate = winners.find(
-      (winner: Winner) => winner.id === newWinner.id
+      (winner: Winner) => winner.id === newWinner?.id
     );
-
-    if (winnerToUpdate && newWinner.time) {
+    if (winnerToUpdate && newWinner?.time) {
       updateWinner({
         id: winnerToUpdate.id,
         data: {
@@ -34,9 +33,9 @@ function useAddOrUpdateWinner() {
     }
     if (!winnerToUpdate) {
       createWinner({
-        id: newWinner.id || 0,
+        id: newWinner?.id || 0,
         wins: 1,
-        time: newWinner.time || 0,
+        time: newWinner?.time || 0,
       });
     }
   }

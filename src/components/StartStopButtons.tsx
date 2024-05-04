@@ -1,7 +1,7 @@
 import Button from "./Button";
 
 interface StartStopButtonsProps {
-  buttonStatus: boolean;
+  buttonStatus?: boolean;
   handleStart: () => void;
   handleStop: () => void;
 }
@@ -28,5 +28,9 @@ function StartStopButtons({
     </div>
   );
 }
+
+StartStopButtons.defaultProps = {
+  buttonStatus: null,
+};
 
 export default StartStopButtons;

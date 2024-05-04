@@ -20,6 +20,7 @@ export default function Input({ text, func }: InputProps) {
         className="text-red-500 font-semibold border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-pink-500"
       />
       <input
+        name={`${text}`}
         type="color"
         value={carColor}
         onChange={(e) => setCarColor(e.target.value)}

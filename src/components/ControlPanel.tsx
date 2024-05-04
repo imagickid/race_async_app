@@ -3,19 +3,15 @@ import CreateNewCar from "./CreateNewCar";
 import UpdateCar from "./UpdateCar";
 import RaceAll from "./RaceAll";
 import ResetAll from "./ResetAll";
+import { CarsProps } from "./types";
 
 interface Cars {
   cars: CarsProps[] | undefined;
 }
-interface CarsProps {
-  id: number;
-  name: string;
-  color: string;
-}
 
 function ControlPanel({ cars }: Cars) {
   return (
-    <div className="mx-3 flex justify-between">
+    <div className="flex flex-col px-2 gap-2 place-items-center lg:flex lg:flex-row lg:justify-between">
       <div className="flex gap-2">
         <RaceAll cars={cars} />
         <ResetAll cars={cars} />

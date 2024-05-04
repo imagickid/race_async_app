@@ -30,6 +30,7 @@ function SelectDeleteButtons({ carId }: SelectDeleteButtonsProps) {
         func={() => {
           deleteCar(carId);
           deleteWinner(carId);
+          localStorage.removeItem(`${carId}_position`);
         }}
       />
     </div>

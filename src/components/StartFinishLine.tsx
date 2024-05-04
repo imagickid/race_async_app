@@ -7,7 +7,7 @@ function StartFinishLine({
 }) {
   return (
     <div
-      className="mt-4 rotate-90 w-14 text-center border-b-2 items-center self-baseline mr-5"
+      className="mt-4 rotate-90 text-sm sm:text-base w-10 sm:w-14 text-center border-b-2 items-center self-baseline mr-5"
       style={{ color: carColor }}
     >
       {text}
