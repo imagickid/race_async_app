@@ -17,6 +17,7 @@ function useCarState({ id }: { id: number }) {
   });
   const [drive, setDrive] = useState<boolean>(false);
   const position = getPosition(id);
+
   const positionStyle = {
     transform: `translateX(${duration ? position : 0}px)`,
     transition: `transform ${state.raceAll || drive ? duration : 0}ms linear`,

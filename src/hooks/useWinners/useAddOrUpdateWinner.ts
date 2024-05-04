@@ -1,5 +1,5 @@
 import { createWinner, updateWinner } from "../../api/apiWinners";
-import useGetWinners from "./useGetWinners";
+import useGetAllWinners from "./useGetAllWinners";
 
 interface Winner {
   wins: number;
@@ -13,10 +13,10 @@ type NewWinner = {
 };
 
 function useAddOrUpdateWinner() {
-  const { winners } = useGetWinners();
+  const { allWinners, isFetching } = useGetAllWinners();
 
   function handleCreateOrUpdate(newWinner: NewWinner | null) {
-    const winnerToUpdate = winners.find(
+    const winnerToUpdate = allWinners.find(
       (winner: Winner) => winner.id === newWinner?.id
     );
     if (winnerToUpdate && newWinner?.time) {
@@ -39,7 +39,8 @@ function useAddOrUpdateWinner() {
       });
     }
   }
-  return handleCreateOrUpdate;
+
+  return { handleCreateOrUpdate, isFetching };
 }
 
 export default useAddOrUpdateWinner;

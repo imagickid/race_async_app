@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import useAddOrUpdateWinner from "../hooks/useWinners/useAddOrUpdateWinner";
+
 interface WinnerModalProps {
   onClose: () => void;
   winner: {
@@ -8,6 +11,16 @@ interface WinnerModalProps {
 }
 
 function WinnerModal({ onClose, winner }: WinnerModalProps) {
+  const hasWinnerChanged = useRef(false);
+  const { handleCreateOrUpdate, isFetching } = useAddOrUpdateWinner();
+
+  useEffect(() => {
+    if (!hasWinnerChanged.current && !isFetching) {
+      handleCreateOrUpdate(winner);
+      hasWinnerChanged.current = true;
+    }
+  }, [handleCreateOrUpdate, winner, isFetching]);
+
   if (!winner) return null;
   const { name, time } = winner;
 

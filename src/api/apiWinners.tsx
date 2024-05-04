@@ -15,6 +15,16 @@ export async function getWinners(page: number, sort: string, order: string) {
   return { data, totalCount };
 }
 
+export async function getAllWinners() {
+  const response = await fetch(`${ASYNC_RACE_API}/winners`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+
+  return data;
+}
+
 export async function getWinner(id: number) {
   const response = await fetch(`${ASYNC_RACE_API}/winners/${id}`);
   if (!response.ok) {
