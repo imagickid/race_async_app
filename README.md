@@ -1,10 +1,8 @@
-https://race-async-app.vercel.app/
+🚀 UI Deployment: https://race-async-app.vercel.app/ SCORE 370 / 370
 
 NOTE: For this app to work, you should locally run this API on https://github.com/mikhama/async-race-api
 
 Checklist
-
-🚀 UI Deployment
 
 ✅ Deployment Platform: Successfully deploy the UI on one of the following platforms: GitHub Pages, Netlify, Vercel, Cloudflare Pages, or a similar service.
 
@@ -14,7 +12,7 @@ Requirements to Commits and Repository
 
 ✅ Checklist included in README.md: Include the project's checklist in the README.md file. Mark all implemented features to provide a clear overview of the project's completion status.
 
-[ ] Score calculation: Use this checklist to calculate your score. Check all implemented features, then calculate your score and put it at the top of the README.md.
+✅ Score calculation: Use this checklist to calculate your score. Check all implemented features, then calculate your score and put it at the top of the README.md.
 
 ✅ UI Deployment link in README.md: Place the link to the deployed UI at the top of the README.md file, alongside the calculated score.
 
@@ -68,7 +66,7 @@ Requirements to Commits and Repository
 
    🏆 Winners View (45 points)
 
-   [ ] Display Winners (15 points): After some car wins it should be displayed at the "Winners view" table.
+   ✅ Display Winners (15 points): After some car wins it should be displayed at the "Winners view" table.
 
    ✅ Pagination for Winners (10 points): Implement pagination for the "Winners" view, with 10 winners per page.
 

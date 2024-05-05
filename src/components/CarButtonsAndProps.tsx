@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import SelectDeleteButtons from "./SelectDeleteButtons";
 import Car from "./Car/Car";
 import StartFinishLine from "./StartFinishLine";
-import { CarsProps } from "./types";
+import { CarsProps } from "../types/types";
 
 interface Cars {
   isLoading: boolean;

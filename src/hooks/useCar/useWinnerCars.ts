@@ -1,3 +1,4 @@
+import { CarsProps } from "../../types/types";
 import useGetWinners from "../useWinners/useGetWinners";
 import useGetAllCars from "./useGetCar";
 
@@ -7,12 +8,6 @@ interface WinnerProps {
   time: number;
 }
 
-interface CarProps {
-  id: number;
-  name: string;
-  color: string;
-}
-
 function useWinnerCars() {
   const { isFetching: isGettingWinners, winners } = useGetWinners();
   const { isFetching: isGettingCars, cars } = useGetAllCars();
@@ -20,7 +15,7 @@ function useWinnerCars() {
   if (isGettingWinners || isGettingCars) return null;
 
   const filteredCarsData = winners.map((winner: WinnerProps) =>
-    cars.find((car: CarProps) => car.id === winner.id)
+    cars.find((car: CarsProps) => car.id === winner.id)
   );
   const combinedData = winners.map((winner: WinnerProps, index: number) => {
     return { ...winner, ...filteredCarsData[index] };

@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Button from "./Button";
 import { useCarContext } from "../contexts/CarContext";
 import WinnerModal from "./WinnerModal";
-import { RaceAllProps } from "./types";
+import { RaceAllProps } from "../types/types";
 import { driveModeEngine, startStopEngine } from "../api/apiEngine";
 import { SCREEN_BOUNDARIES } from "../utils/constants";
 

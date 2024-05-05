@@ -3,7 +3,7 @@ import CreateNewCar from "./CreateNewCar";
 import UpdateCar from "./UpdateCar";
 import RaceAll from "./RaceAll";
 import ResetAll from "./ResetAll";
-import { CarsProps } from "./types";
+import { CarsProps } from "../types/types";
 
 interface Cars {
   cars: CarsProps[] | undefined;

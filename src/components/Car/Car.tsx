@@ -3,6 +3,7 @@ import StartStopButtons from "../StartStopButtons";
 import { useCarContext } from "../../contexts/CarContext";
 import { identifyCurrentPlace } from "../../utils/helpers";
 import useCarState from "./useCarState";
+import { MILLI_SEC } from "../../utils/constants";
 
 interface CarProps {
   id: number;
@@ -29,7 +30,7 @@ function Car({ id, name, children }: CarProps) {
 
   useEffect(() => {
     if (engineStatus && engineStatus.success && typeof duration === "number")
-      winnerIs({ id, name, time: duration / 1000 });
+      winnerIs({ id, name, time: duration / MILLI_SEC });
   });
 
   return (
