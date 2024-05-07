@@ -12,11 +12,9 @@ function GenerateHundredCars() {
   };
   return (
     <div className="w-28">
-      <Button
-        text="Generate cars"
-        color="pink"
-        func={handeleCreateHundredCars}
-      />
+      <Button color="pink" func={handeleCreateHundredCars}>
+        Generate cars
+      </Button>
     </div>
   );
 }

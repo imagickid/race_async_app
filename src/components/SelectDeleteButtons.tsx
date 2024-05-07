@@ -19,20 +19,19 @@ function SelectDeleteButtons({ carId }: SelectDeleteButtonsProps) {
 
   return (
     <div className="flex flex-col gap-2 w-13">
-      <Button
-        color="cyan"
-        text="Select"
-        func={() => handleSelect(carId.toString())}
-      />
+      <Button color="cyan" func={() => handleSelect(carId.toString())}>
+        Select
+      </Button>
       <Button
         color="pink"
-        text="Delete"
         func={() => {
           deleteCar(carId);
           deleteWinner(carId);
           localStorage.removeItem(`${carId}_position`);
         }}
-      />
+      >
+        Delete
+      </Button>
     </div>
   );
 }

@@ -27,13 +27,8 @@ function RaceAll({ cars }: RaceAllProps) {
 
   return (
     <>
-      <Button
-        color="emerald"
-        text="Race"
-        func={raceAll}
-        disabled={state.raceAll}
-      >
-        <FaPlay />
+      <Button color="emerald" func={raceAll} disabled={state.raceAll}>
+        Race <FaPlay />
       </Button>
       {state.isOpenModal && winner && (
         <WinnerModal

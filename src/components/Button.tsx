@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   color: keyof typeof colors;
-  text: string;
   disabled?: boolean;
   func: () => void;
   children?: ReactNode;
@@ -28,7 +27,6 @@ const colors: Colors = {
 
 export default function Button({
   color,
-  text,
   disabled,
   func,
   children,
@@ -42,7 +40,6 @@ export default function Button({
       className={`text-xs py-1 px-2 ${pickedColor} rounded flex items-center gap-2`}
       onClick={func}
     >
-      {text}
       {children}
     </button>
   );

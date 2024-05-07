@@ -13,18 +13,12 @@ function StartStopButtons({
 }: StartStopButtonsProps) {
   return (
     <div className="flex flex-col gap-2 w-7">
-      <Button
-        color="yellow"
-        text="A"
-        func={() => handleStart()}
-        disabled={buttonStatus}
-      />
-      <Button
-        color="rose"
-        text="B"
-        func={() => handleStop()}
-        disabled={!buttonStatus}
-      />
+      <Button color="yellow" func={() => handleStart()} disabled={buttonStatus}>
+        A
+      </Button>
+      <Button color="rose" func={() => handleStop()} disabled={!buttonStatus}>
+        B
+      </Button>
     </div>
   );
 }

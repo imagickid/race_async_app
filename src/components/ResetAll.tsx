@@ -20,8 +20,8 @@ function ResetAll({ cars }: RaceAllProps) {
   }
 
   return (
-    <Button color="pink" text="Reset" func={() => resetAll()}>
-      <HiArrowUturnLeft />
+    <Button color="pink" func={() => resetAll()}>
+      Reset <HiArrowUturnLeft />
     </Button>
   );
 }
